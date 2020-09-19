@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card o-hidden border-0 shadow-lg my-3">
+            <h5 class="card-header bg-primary text-white">
+                <div class="col-auto float-left">
+                    <i class="fas fa-info-circle fa-1x text-gray-300"></i>
+                </div>
+                Sobre Nosotros
+            </h5>
+            <div class="row">
+                <div class="card o-hidden border-left-primary shadow-lg">
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            Somos estudiantes del Diplomado Desarrollo Web con C#, impartido por la Universidad Autonoma De Santo Domingo (UASD). Dicho diplomado
+                            fué iniciado a mediados de julio 2020 con una duración aproximada de 9 semanas (podrían ser mas).
+                            <br />
+                            Elegimos crear un sistema de repuesto como nuestro proyecto final para cualquier empresa dedicada a la venta de repuestos. Dicho sistema
+                            fué desarrollado por: Carlos Raul Peña Evertsz y Jerlis Antonio Medina Gomez.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card o-hidden border-left-primary shadow-lg h-100">
+                <img src="~/Content/Imagenes/cp.jpg" class="card-img-top" style="width:100px;height:100px;"/>
+                <div class="card-body">
+                    <h5 class="card-title">Carlos Raul Peña Evertsz</h5>
+                    <p class="card-text text-justify">
+                        Soy Graduado de Ingeniería de Sistemas en la UNPHU. Tengo Conocimientos Generales en los lenguajes de Programación: C, VisualBasic, Xojo(RBasic) y algunos otros. Base de datos: MySQL, MSSQL, Sqlite.
+                        Sistemas Operativos: Windows, Linux. En la actualidad estoy laborando en Editora Dominicana SRL, una empresa familiar en el area de la industria gráfica.<br /><br /> 
+                        
+                        De forma independiente desarrollo sistemas de automatización/administración computarizadas para industrias,
+                        en especial equipos de HVAC y/o edificios inteligentes.<br /><br />
+
+                        Mi objetivo es ampliar mis conocimientos en las herramientas de desarrollo Web, en especial
+                        de la linea Microsoft, para contar con mejores alternativas en el desarrollo de applicaciones para la Web y dispositivos móviles.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 float-right">
+            <div class="card o-hidden border-left-primary shadow-lg h-100">
+                <img src="~/Content/Imagenes/jm.jpg" class="card-img-top" style="width:100px;height:100px;"/>
+                <div class="card-body">
+                    <h5 class="card-title">Jerlis Antonio Medina Gomez</h5>
+                    <p class="card-text text-justify">
+                        Soy egresado de la Universidad Tecnologica de Santiago (UTESA) Recinto Pto. Pta.,
+                        con el titulo de Ingeniero en Informatica. Más de 5 años de experiencia en el area de TI, desempeñandome en el area de
+                        soporte tecnico y en el area de programación. <br /><br />
+
+                        Conocimientos en lenguajes de programación como: C#, Java Script, HTML, SQL Query, entre otros. Manejo de base datos relacionales con SQL Server. Conocimientos basicos en el modelado de personajes 3d.<br /><br />
+
+                        Actualmente laboro como asistente de sistemas en la empresa Union Hotelera Dominicana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<p>
+    @Html.ActionLink(" Inicio", "Index", null, new { @class = "fa fa-home" })
+</p>

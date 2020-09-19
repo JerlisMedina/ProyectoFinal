@@ -1,0 +1,34 @@
+﻿@model SistemaRepuesto.Models.MainMenu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MainMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MainDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainEstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainEstatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MainMenuID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

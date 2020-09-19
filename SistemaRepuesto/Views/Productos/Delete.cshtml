@@ -1,0 +1,53 @@
+﻿@model SistemaRepuesto.Models.InventarioArticulo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<hr />
+<div class="container-fluid">
+    <div class="row offset-4">
+        <div class="card o-hidden border-bottom-primary shadow-lg h-100" style="width:18rem;">
+            <img src="~/Content/Imagenes/@Model.ArtImagen" class="card-img-top w-100 h-50" />
+            <div class="card-body">
+                <h5 class="card-title text-gray-500"><b>Detalles del Producto</b></h5>
+                <p class="card-text text-gray-500">
+                    <b>Codigo: </b>@Html.DisplayFor(model => model.Codigo)
+                </p>
+                <p class="card-text text-gray-500">
+                    <b>Descripción: </b>@Html.DisplayFor(model => model.Descripcion)
+                </p>
+                <p class="card-text text-gray-500">
+                    <b>Año: </b>@Html.DisplayFor(model => model.Year)
+                <p />
+                <p class="card-text text-gray-500">
+                    <b>Precio: </b>@Html.DisplayFor(model => model.CostoUnitario)
+                <p />
+                <p class="card-text text-gray-500">
+                    <b>Precio Venta: </b>@Html.DisplayFor(model => model.PrecioUnitarioVenta)
+                <p />
+                <p class="card-text text-gray-500">
+                    <b>Disponible: </b>@Html.DisplayFor(model => model.CantidadDisponible)
+                <p />
+
+                <div class="card-text">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="fa fa-trash btn btn-primary btn-block" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</p>

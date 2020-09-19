@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-wrench fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Clientes</h2>
+        @Html.ActionLink("Crear Nuevo", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-bordered dataTable table-responsive" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Imagen</th>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.Apellidos)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sexo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Direccion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.Fecha_Nacimiento)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cli in Model)
+                    {
+                    <tr role="row">
+                        <td><img src="~/Content/Imagenes/@cli.CliImagen" class="img-fluid img-profile rounded-circle" style="width:60px;height:60px;" /></td>
+                        <td>@Html.DisplayFor(model => cli.Nombre)</td>
+                        <td>@Html.DisplayFor(model => cli.Apellidos)</td>
+                        <td>@Html.DisplayFor(model => cli.Sexo)</td>
+                        <td>@Html.DisplayFor(model => cli.Direccion)</td>
+                        <td>@Html.DisplayFor(model => cli.Telefono)</td>
+                        <td>@Html.DisplayFor(model => cli.Email)</td>
+                        <td>@Html.DisplayFor(model => cli.Fecha_Nacimiento)</td>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = cli.Id }, new { @class = "fa fa-edit" })
+                            @Html.ActionLink(" ", "Details", new { id = cli.Id }, new { @class = "fa fa-th-list" })
+                            @Html.ActionLink(" ", "Delete", new { id = cli.Id }, new { @class = "fa fa-trash" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>

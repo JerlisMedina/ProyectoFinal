@@ -1,0 +1,174 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.DetalleMovInventario>
+
+@{
+    /**/
+    Layout = null;
+    ViewBag.Title = "Reporte Movimientos Inventario";
+}
+
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: lawngreen;
+            color: black;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: lavender;
+        }
+
+        #icon-modificar {
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527zM8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/> </svg>
+        }
+
+        #icon-printer {
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" > <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/ > <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z"/ > <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/ > </svg >
+        }
+    </style>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        function printpage() {
+            var grupobotones = document.getElementById("grupobotones");
+            grupobotones.style.visibility = 'hidden';
+            window.print()
+            grupobotones.style.visibility = 'visible';
+        }
+    </script>
+    <script type="text/javascript">
+        function continuar() {
+            location.href = '/Reportes/ReporteMovInventario';
+        }
+    </script>
+
+
+</head>
+
+@{
+    decimal Totales = 0;
+    int Cantidad = 0;
+}
+
+<body>
+
+    <div id="grupobotones" style="text-align:center;">
+        <div class="container">
+            <input id="printbutton" class="btn btn-success" type="button" value="Imprimir Reporte" onclick="printpage()" />
+            <input id="continuarbutton" class="btn btn-success" type="button" value="Volver a Consulta" onclick="continuar()" />
+        </div>
+    </div>
+
+    <br />
+    <h2 style="background-color:  lavender; color: black; text-align: center; font-style: oblique;">
+        Reporte Movimientos Inventario
+    </h2>
+
+
+
+    @using (Html.BeginForm())
+    {
+        <div class="well" id="cuerpolistado">
+            <table align="center" border="=" 1" cellpadding="4" cellspacing="4">
+                <thead>
+                    <tr>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Código</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Descripción</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Fecha</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Documento</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Nombre/Compañía</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Stock Inicial</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Cant. Vendida</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Stock Final</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        //Operaciones en C# Previas a la generacion del detalle
+                        {
+                            if (item.Venta.Cliente.NombreComercial == "")
+                            {
+                                item.Venta.Cliente.NombreComercial = item.Venta.Cliente.Nombre + " " + item.Venta.Cliente.Apellidos;
+                            }
+                            int MaxLen = 40;
+                            String Descripcion = item.InventarioArticulo.Descripcion;
+                            if (Descripcion.Length > MaxLen)
+                            {
+                                Descripcion = Descripcion.Substring(0, MaxLen) + "..."; //Truncamos Descripcion
+                            }
+                            item.InventarioArticulo.Descripcion = Descripcion;
+
+                            Cantidad++; // Cantidad de Operaciones
+                        }
+
+                        <tr style="color:darkslategrey;">
+                            <td>@item.InventarioArticulo.Codigo</td>
+                            <td>@item.InventarioArticulo.Descripcion</td>
+                            <td style="text-align:center;">@item.Venta.Fecha.ToString("dd-MMM-yyyy")</td>
+                            <td style="text-align:center;">@item.Venta.ComprobanteFiscal</td>
+                            <td>@item.Venta.Cliente.NombreComercial</td>
+                            <td style="text-align:center;">@String.Format("{0:N0}", item.Stock_Inicial)</td>
+                            <td style="text-align:center;">@String.Format("{0:N0}", item.Stock_Inicial - item.Stock_Actual)</td>
+                            <td style="text-align:center;">@String.Format("{0:N0}", item.Stock_Actual)</td>
+                            <td style="text-align:right;padding-right:5px;">@String.Format("{0:C2}", item.Precio_Venta)</td>
+                        </tr>
+
+                    }
+                    <tr style="color:black">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td style="text-align:right;padding-right:5px;">Cantidad Articulos Movidos </td>
+                        <td></td>
+                        <td style="text-align:center;">@String.Format("{0:N0}", Cantidad)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+</body>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cuerpolistado tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+
+}
+
+
+

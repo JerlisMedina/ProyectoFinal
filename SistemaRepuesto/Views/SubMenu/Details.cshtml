@@ -1,0 +1,58 @@
+﻿@model SistemaRepuesto.Models.SubMenu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubController)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubController)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubAction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubAction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainMenu.MainDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainMenu.MainDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.RoleDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.RoleDescripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

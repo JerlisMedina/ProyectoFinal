@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.SubMenu>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-cog fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Sub-Menu</h2>
+        @Html.ActionLink("Nuevo Sub-Menu", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-responsive dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Sub-Menu</th>
+                        <th>Controller</th>
+                        <th>Action</th>
+                        <th>Menu</th>
+                        <th>Role</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sub in Model)
+                    {
+                    <tr role="row">
+                        <td>@Html.DisplayFor(modelItem => sub.SubDescripcion)</td>
+                        <td>@Html.DisplayFor(modelItem => sub.SubController)</td>
+                        <td>@Html.DisplayFor(modelItem => sub.SubAction)</td>
+                        <td>@Html.DisplayFor(modelItem => sub.MainMenu.MainDescripcion)</td>
+                        <td>@Html.DisplayFor(modelItem => sub.Role.RoleDescripcion)</td>
+                        <td>
+                            @Html.ActionLink(" Editar", "Edit", new { id = sub.SubID }, new { @class = "fa fa-edit" })
+                            @*@Html.ActionLink(" ", "Details", new { id = sub.SubID }, new { @class = "fa fa-th-list" })*@
+                            @Html.ActionLink(" Eliminar", "Delete", new { id = sub.SubID }, new { @class = "fa fa-trash" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>

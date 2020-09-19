@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.InventarioArticulo>
+
+@{
+    ViewBag.Title = "Venta de Productos";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <h2 class="card-title text-primary">Catalogo Productos</h2>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row offset-1">
+
+        @foreach (var prod in Model)
+        {
+            <div class="card o-hidden border-bottom-primary shadow-lg my-3" style="width:10rem;">
+                <img src="~/Content/Imagenes/@prod.ArtImagen" class="card-img-top w-100 h-50" />
+                
+                <div class="card-body" style="font-size:smaller;">
+                    <div class="card-title small">
+                        @Html.ActionLink(prod.Descripcion, "Details", "Productos", new { id = prod.Id_Articulo }, new { @class = "card-text" })
+                    </div>
+
+                    @if (prod.CantidadDisponible == null) { prod.CantidadDisponible = 0; }
+                    @if (prod.PrecioUnitarioVenta == null) { prod.PrecioUnitarioVenta = 0; }
+                    
+                    <h5 class="card-text small">
+                        Disponible: @String.Format("{0:N0}", prod.CantidadDisponible)
+                    </h5>
+
+                    <h5 class="card-text small">
+                        Precio: @String.Format("{0:C2}", prod.PrecioUnitarioVenta)
+                    </h5>
+                </div>
+
+                <div class="card-footer">
+                    <form action='~/Ventas/Carro/?idArt=@prod.Id_Articulo' method='post'>
+                        <div>
+                            <input type='submit' class='btn btn-primary btn-sm text-center fa-shopping-cart' name='add_tag' value='  Agregar  '>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</p>

@@ -1,0 +1,53 @@
+﻿@model SistemaRepuesto.Models.VentasCarrito
+
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Id_Articulo)
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="card mx-auto o-hidden border-bottom-primary shadow-lg my-3" style="width:20rem;">
+    <p class="card-header bg-primary text-white">¿Seguro Desea Borrar Artículo?</p>
+
+    <img src="~/Content/Imagenes/@(Model.ArtImagen)" class="card-img-top w-100 h-50" />
+
+
+    <div style="text-align:center;font-size:larger;padding-left:7%;">
+        Cantidad:
+        <div style="width:60%;padding-left:35%;">
+            @String.Format("{0:N0}", Model.Cantidad)
+        </div>
+    </div>
+    <div class="card-body" style="text-align:center;">
+        @Model.Descripcion
+    </div>
+
+    <div class="card-footer">
+        <div class="text-center">
+            <button type="submit" value="BorrarItem" class="btn btn-danger">
+                <i class="fa fa-trash"></i> Borrar
+            </button>
+
+            <button type="button" class="btn btn-success">
+                <i class="fa fa-backspace"></i> @Html.ActionLink("Cancelar", "Carro", null, new { @class = "text-white" })
+            </button>
+        </div>
+    </div>
+
+
+</div>
+}
+
+
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}*@

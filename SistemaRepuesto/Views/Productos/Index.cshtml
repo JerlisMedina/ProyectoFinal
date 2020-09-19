@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.InventarioArticulo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-wrench fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Productos</h2>
+        @Html.ActionLink("Crear Nuevo", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-responsive table-bordered dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Imagen</th>
+                        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Year)</th>
+                        <th>@Html.DisplayNameFor(model => model.CantidadDisponible)</th>
+                        <th>@Html.DisplayNameFor(model => model.CostoUnitario)</th>
+                        <th>@Html.DisplayNameFor(model => model.PrecioUnitarioVenta)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prod in Model)
+                    {
+                    <tr role="row">
+                        <td><img src="~/Content/Imagenes/@prod.ArtImagen" class="img-fluid img-profile rounded" style="width:60px;height:60px;" /></td>
+                        <td>@Html.DisplayFor(model => prod.Codigo)</td>
+                        <td>@Html.DisplayFor(model => prod.Descripcion)</td>
+                        <td>@Html.DisplayFor(model => prod.Year)</td>
+                        <td>@Html.DisplayFor(model => prod.CantidadDisponible)</td>
+                        <td>@Html.DisplayFor(model => prod.CostoUnitario)</td>
+                        <td>@Html.DisplayFor(model => prod.PrecioUnitarioVenta)</td>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = prod.Id_Articulo }, new { @class = "fa fa-edit" })
+                            @Html.ActionLink(" ", "Details", new { id = prod.Id_Articulo }, new { @class = "fa fa-th-list" })
+                            @Html.ActionLink(" ", "Delete", new { id = prod.Id_Articulo }, new { @class = "fa fa-trash" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>

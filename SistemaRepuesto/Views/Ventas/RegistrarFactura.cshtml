@@ -1,0 +1,295 @@
+﻿@using SistemaRepuesto.Models
+
+@model IEnumerable<SistemaRepuesto.Models.VentasCarrito>
+
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>JC Factura</title>
+
+    <style>
+        .invoice-box {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .direccion {
+            font-size: 10px;
+            line-height: 14px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+            .invoice-box table td {
+                padding: 5px;
+                vertical-align: top;
+            }
+
+            .invoice-box table tr td:nth-child(2) {
+                text-align: right;
+            }
+
+            .invoice-box table tr.top table td {
+                padding-bottom: 20px;
+            }
+
+                .invoice-box table tr.top table td.title {
+                    font-size: 45px;
+                    line-height: 45px;
+                    color: #333;
+                }
+
+            .invoice-box table tr.information table td {
+                padding-bottom: 40px;
+            }
+
+
+            .invoice-box table tr.heading td {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+            }
+
+            .invoice-box table tr.details td {
+                padding-bottom: 20px;
+            }
+
+            .invoice-box table tr.item td {
+                border-bottom: 1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td {
+                border-bottom: none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2) {
+                border-top: 2px solid #eee;
+                font-weight: bold;
+            }
+
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+            .rtl table {
+                text-align: right;
+            }
+
+                .rtl table tr td:nth-child(2) {
+                    text-align: left;
+                }
+
+        p.solid {
+            border-style: solid;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        function printpage() {
+            var grupobotones = document.getElementById("grupobotones");
+            grupobotones.style.visibility = 'hidden';
+            window.print()
+            grupobotones.style.visibility = 'visible';
+        }
+    </script>
+    <script type="text/javascript">
+        function continuar() {
+            location.href = '/Ventas/Continuar';
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="grupobotones" style="text-align:center;">
+        <div class="container">
+            <input id="printbutton" class="btn btn-success" type="button" value="Imprimir Factura" onclick="printpage()" />
+            <input id="continuarbutton" class="btn btn-success" type="button" value="Continuar" onclick="continuar()" />
+        </div>
+    </div>
+
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td class="direccion">
+                                <img src="~/Content/Imagenes/TipografiaPlain.png" style="width:80%; max-width:500px;">
+                                <div style="text-align:center; position:ab;font-size:12pt;padding-top:0px;width:90%; max-width:600px;">
+                                    Calle 27 de Febrero esq. John F. Kennedy, D.N.<br>
+                                    Tel. 809-123-1234 * email: info@RepuestosJC.com<br>
+                                    <b>RNC 123101203</b><br>
+                                    <div>
+                            </td>
+
+                            <td style="text-align:center; font-size:14pt;">
+                                <br><br>
+                                @TempData.Peek("ClienteTipoFactura")<br>
+                                <b>@TempData.Peek("NCF")    </b><br>
+                                Válido hasta 31/Dic/2020
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                <b>FACTURADO A:</b><br>
+                                @TempData.Peek("ClienteNombre")<br>
+                                @TempData.Peek("ClienteNombreComercial")<br>
+                                @TempData.Peek("ClienteDireccion")<br>
+                                @TempData.Peek("ClienteTelefono")<br />
+                                @TempData.Peek("ClienteRNC")<br><br />
+                                Fecha: @TempData.Peek("FECHAFACTURA")<br>
+                            </td>
+                            <td sytle="align:right;"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="heading" style="width:100%;">
+                <td style="width:15%;padding-left:15px;padding-top:10px;padding-right:15px;">
+                    Método de Pago
+                </td>
+                <td style="width:35%;"></td>
+                <td style="width:35%;"></td>
+                <td style="width:10%;padding-left:15px;padding-top:10px;padding-right:15px;">
+                    Vendedor
+                </td>
+
+            </tr>
+            <table>
+                <tr class="details" style="width:100%;">
+                    <td style="width:15%;padding-left:15px;padding-top:10px;padding-right:15px;">
+                        @TempData.Peek("METODOPAGO")
+                    </td>
+                    <td style="width:60%;"></td>
+                    <td style="width:20%;text-align:right;padding-left:15px;padding-top:10px;padding-right:15px;">
+                        @TempData.Peek("VENDEDOR")
+                    </td>
+
+                </tr>
+            </table>
+            </tr>
+
+
+            <table>
+                <tr class="heading" style="width:100%;">
+                    <td style="width:5%">
+                        Cant.
+                    </td>
+
+                    <td style="width:4%;"></td>
+                    <td style="width:62%;">
+                        Descripción
+                    </td>
+                    <td style="width:10%;text-align:center;">
+                        P.Unit.
+                    </td>
+                    <td style="width:15%;text-align:center;">
+                        Total
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="details">
+                        <div>
+                            <th style="width:3%;text-align:center;padding-left:5px;font-weight:normal;">@String.Format("{0:N0}", item.Cantidad)</th>
+                            <th style="width:7%;text-align:center;font-weight:normal;"> </th>
+                            <th style="width:60%;text-align:left;font-weight:normal;">@item.Descripcion</th>
+                            <th style="width:15%;text-align:right;font-weight:normal;">@String.Format("{0:C2}", item.PrecioUnitarioVenta)</th>
+                            <th style="width:15%;padding-right:5px;text-align:right;font-weight:normal;">@String.Format("{0:C2}", item.Total)</th>
+                        </div>
+                    </tr>
+
+                }
+
+            </table>
+            <br />
+            <table>
+                <tr class="heading" style="width:100%;">
+                    <td></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr class="total">
+                    <div>
+                        <th style="width:84%;text-align:right;">SUBTOTAL</th>
+                        <th style="width:1%;"></th>
+                        <th style="width:15%;padding-right:5px;text-align:right;">@TempData.Peek("Subtotal")</th>
+
+                    </div>
+                </tr>
+            </table>
+            <table>
+                <tr class="total">
+                    <div>
+                        <th style="width:84%;text-align:right;">ITBIS</th>
+                        <th style="width:1%;"></th>
+                        <th style="width:15%;padding-right:5px;text-align:right;">@TempData.Peek("Itbis")</th>
+
+                    </div>
+                </tr>
+            </table>
+            <table>
+                <tr class="total">
+                    <div>
+                        <th style="width:84%;text-align:right;">TOTAL</th>
+                        <th style="width:1%;"></th>
+                        <th style="width:15%;padding-right:5px;text-align:right;">@TempData.Peek("Total")</th>
+
+                    </div>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <br />
+            <br />
+            _____________________________________
+            <br />
+            <lu style="padding-left:100px;">Recibido Por:</lu>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+</html>
+
+
+

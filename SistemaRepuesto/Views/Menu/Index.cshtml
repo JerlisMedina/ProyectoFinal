@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.MainMenu>
+
+@{
+    ViewBag.Title = "Index";
+    string activo;
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-cog fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Opciones de Menu</h2>
+        @Html.ActionLink("Nuevo Menu", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-responsive dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Menu</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var menu in Model)
+                    {
+                        <tr role="row">
+                            <td>@Html.DisplayFor(model => menu.MainDescripcion)</td>
+                            @if (menu.MainEstatus == true) { activo = "Si"; } else { activo = "No"; }
+                            <td>@activo</td>
+                            <td>
+                                @Html.ActionLink(" Editar", "Edit", new { id = menu.MainMenuID }, new { @class = "fa fa-edit" })
+                                @*@Html.ActionLink(" ", "Details", new { id = menu.MainMenuID }, new { @class = "fa fa-th-list" })*@
+                                @*@Html.ActionLink(" Eliminar", "Delete", new { id = menu.MainMenuID }, new { @class = "fa fa-trash" })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>

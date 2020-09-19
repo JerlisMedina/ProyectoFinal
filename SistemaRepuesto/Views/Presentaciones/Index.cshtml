@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.Presentacion>
+
+@{
+    ViewBag.Title = "Index";
+    string activo;
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-wrench fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Presentacion Productos</h2>
+        @Html.ActionLink("Nueva Presentacion", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-responsive dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        <tr role="row">
+                            <td>@Html.DisplayFor(model => p.Codigo)</td>
+                            <td>@Html.DisplayFor(model => p.Descripcion)</td>
+                            @if (p.Estatus == true) { activo = "Si"; } else { activo = "No"; }
+                            <td>@activo</td>
+                            <td>
+                                @Html.ActionLink(" ", "Edit", new { id = p.Id }, new { @class = "fa fa-edit" })
+                                @Html.ActionLink(" ", "Details", new { id = p.Id }, new { @class = "fa fa-th-list" })
+                                @Html.ActionLink(" ", "Delete", new { id = p.Id }, new { @class = "fa fa-trash" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>
+

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.EmpresaConfig>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-wrench fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Empresas</h2>
+        @Html.ActionLink("Crear Nuevo", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-bordered dataTable table-responsive" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Imagen</th>
+                        <th>@Html.DisplayNameFor(model => model.NombreEmpresa)</th>
+                        <th>@Html.DisplayNameFor(model => model.RNC)</th>
+                        <th>@Html.DisplayNameFor(model => model.TasaItbisActual)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF01_Proximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF02_Proximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF03_Proximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF04_Proximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF14_Proximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.NCF15_Proximo)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in Model)
+                    {
+                    <tr role="row">
+                        <td><img src="~/Content/Imagenes/@emp.ArchivoLogo" class="img-fluid img-profile rounded" style="width:60px;height:60px;" /></td>
+                        <td>@Html.DisplayFor(model => emp.NombreEmpresa)</td>
+                        <td>@Html.DisplayFor(model => emp.RNC)</td>
+                        <td>@Html.DisplayFor(model => emp.TasaItbisActual)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF01_Proximo)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF02_Proximo)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF03_Proximo)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF04_Proximo)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF14_Proximo)</td>
+                        <td>@Html.DisplayFor(model => emp.NCF15_Proximo)</td>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = emp.EmpresaID }, new { @class = "fa fa-edit" })
+                            @Html.ActionLink(" ", "Details", new { id = emp.EmpresaID }, new { @class = "fa fa-th-list" })
+                            @Html.ActionLink(" ", "Delete", new { id = emp.EmpresaID }, new { @class = "fa fa-trash" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Inicio", "Index", "Home", null, new { @class = "fa fa-home" })
+</div>

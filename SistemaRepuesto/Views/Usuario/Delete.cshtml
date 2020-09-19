@@ -1,0 +1,65 @@
+﻿@model SistemaRepuesto.Models.Login
+
+@{
+    ViewBag.Title = "Delete";
+    string activo;
+}
+
+<div class="container-fluid">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.LoginID)
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <h5 class="card-header bg-primary text-white">
+            <div class="col-auto float-right">
+                <i class="fas fa-trash fa-1x text-gray-300"></i>
+            </div>
+            Eliminar Usuario: @Model.PersonalName?
+        </h5>
+
+        <div class="card-body p-5">
+            <div class="form-horizontal">
+
+                <dl class="dl-horizontal">
+
+
+                    <dd>
+                        <b>Usuario: </b>@Html.DisplayFor(model => model.UserName)
+                    </dd>
+
+                    <dd>
+                        <b>Nombre: </b>@Html.DisplayFor(model => model.PersonalName)
+                    </dd>
+
+                    <dd>
+                        <b>Email: </b>@Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dd>
+                        @if (Model.LoginEstatus == true) { activo = "Si"; } else { activo = "No"; }
+                        <b>Activo: </b> @activo
+                    </dd>
+
+                    <dd>
+                        <b>Role: </b>@Html.DisplayFor(model => model.Role.RoleDescripcion)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</div>

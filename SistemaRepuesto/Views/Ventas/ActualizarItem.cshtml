@@ -1,0 +1,56 @@
+﻿@model SistemaRepuesto.Models.VentasCarrito
+
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Id_Articulo)
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card mx-auto o-hidden border-bottom-primary shadow-lg my-3" style="width:20rem;">
+        <p class="card-header bg-primary text-white" style="text-align:center;font-size:x-large;color:blue;">Actualizar Cantidad</p>
+        <img src="~/Content/Imagenes/@(Model.ArtImagen)" class="card-img-top w-100 h-50" />
+        <div style="text-align:center;font-size:larger;padding-left:7%;">
+            Cantidad:
+            <div style="width:60%;padding-left:35%;">
+                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="text-danger" style="text-align:center;">
+            @TempData["Error"]
+        </div>
+        <div class="card-body" style="text-align:center;">
+            @*text-align:center;*@
+            @Model.Descripcion
+            @*@Html.ActionLink(Model.Descripcion, "Details", new { id = (Model.Id_Articulo) }, new { @class = "card-text" })*@
+        </div>
+
+        <div class="card-footer">
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-edit"></i> Actualizar
+                </button>
+
+                <button type="button" class="btn btn-danger">
+                    <i class="fa fa-backspace"></i> @Html.ActionLink("Cancelar", "Carro", null, new { @class = "text-white" })
+                </button>
+            </div>           
+        </div>
+
+    </div>
+}
+
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+
+
+@*<form action="~/Ventas/Carro/?idArt=@prod.Id_Articulo" method="post">
+        <div>
+            <input type="submit" class="btn btn-primary btn-sm text-center" name="add_tag" value="  Actualizar  ">
+        </div>
+    </form>*@

@@ -1,0 +1,51 @@
+﻿@model SistemaRepuesto.Models.Presentacion
+
+@{
+    ViewBag.Title = "Delete";
+    string activo;
+}
+
+<div class="container-fluid">
+    <div class="row offset-4">
+        <div class="card o-hidden border-bottom-primary shadow-lg h-100" style="width:18rem;">
+            <h5 class="card-header bg-primary text-white">
+                <div class="col-auto float-right">
+                    <i class="fas fa-trash fa-1x text-gray-300"></i>
+                </div>
+                Eliminar Presentacion: @Model.Descripcion?
+            </h5>
+
+            <div class="card-body">
+
+                <p class="card-text text-gray-500">
+                    <b>Codigo: </b>@Html.DisplayFor(model => model.Codigo)
+                <p />
+
+                <p class="card-text text-gray-500">
+                    <b>Descripcion: </b>@Html.DisplayFor(model => model.Descripcion)
+                <p />
+
+                <p class="card-text text-gray-500">
+                    <b>Activo: </b>@if (Model.Estatus == true) { activo = "Si"; } else { activo = "No"; } @activo
+                <p />
+
+                <p class="card-text">
+                    @Html.ActionLink(" Editar", "Edit", new { id = Model.Id }, new { @class = "fa fa-edit" })
+                <p />
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</p>

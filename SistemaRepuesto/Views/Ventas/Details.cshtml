@@ -1,0 +1,114 @@
+﻿@model SistemaRepuesto.Models.Venta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Venta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Trabajador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Trabajador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComprobanteFiscal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComprobanteFiscal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correlativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correlativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Igv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Igv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoGravado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoGravado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoExento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoExento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoDescuento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoDescuento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoItbis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoItbis)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

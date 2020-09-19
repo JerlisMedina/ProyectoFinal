@@ -1,0 +1,38 @@
+﻿@using SistemaRepuesto.Models
+
+<ul class="nav navbar-nav navbar-right">
+    @if (Session["LoginCredentials"] != null)
+    {
+        <li>@Html.ActionLink("Logout", "LogOff", "Login")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Login", "Login", "Login")</li>
+    }
+
+</ul>
+
+@if (Session["MenuMaster"] != null)
+{
+    var MenuMaster = (List<MenuModel>)Session["MenuMaster"];
+    var groupByMenu = MenuMaster.GroupBy(x => x.MainDescripcion).ToList();
+
+    foreach (var Menulist in groupByMenu)
+    {
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#@Menulist.Key" aria-expanded="true" aria-controls="@Menulist.Key">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>@Menulist.Key</span>
+    </a>
+    <hr class="sidebar-divider">
+    <div id="@Menulist.Key" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            @foreach (var Sub in Menulist)
+            {
+                @Html.ActionLink(Sub.SubDescripcion, Sub.SubAction, Sub.SubController, null, new { @class = "collapse-item" })
+            }
+        </div>
+    </div>
+</li>
+    }
+}

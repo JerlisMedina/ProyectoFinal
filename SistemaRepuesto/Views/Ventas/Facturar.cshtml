@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.VentasCarrito>
+
+@{
+
+    ViewBag.Title = "Revision Final";
+}
+@*<div class="row float-right ">
+    <div class="container">*@
+
+<div class="row col-12">
+    <div class="col-md-6">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <b>FACTURAR A:</b><br />
+                @TempData.Peek("ClienteNombre")<br />
+                @TempData.Peek("ClienteNombreComercial")<br />
+                @TempData.Peek("ClienteDireccion")<br />
+                @TempData.Peek("ClienteTelefono")<br />
+                @TempData.Peek("ClienteEmail")<br />
+                <b>TIPO DE FACTURA: </b>@TempData.Peek("ClienteTipoFactura")<br />
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow mb-4 float-right">
+            <div class="card-body">
+                @Html.ActionLink("FACTURAR", "RegistrarFactura", "Ventas", new { Controller = "Ventas" }, new { @class = "btn btn-success" })
+                <button type="button" style="justity-right;padding-right:unset; width:200px;height:120px;" class="btn btn-primary">
+                    @*<span class="badge">*@Artículos: @TempData.Peek("Cantidad")@*</span>*@
+                    </br>SUBTOTAL: @TempData.Peek("Subtotal")
+                    </br>ITBIS: @TempData.Peek("Itbis")
+                    </br>TOTAL: @TempData.Peek("Total")
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="container-fluid align-content-center">
+    <div class="card shadow mb-4" style="width: auto;">
+        <div class="card-body">
+            <table class="table table-responsive table-bordered dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th> Imagen </th>
+                        <th> Descripción </th>
+                        <th> Cantidad </th>
+                        <th> Precio Unitario</th>
+                        <th>Monto Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prod in Model)
+                    {
+                        <tr role="row">
+                            @*Modificado por Carlos*@
+                            <td><img src="~/Content/Imagenes/@prod.ArtImagen" class="img-fluid img-profile rounded" style="width:60px;height:60px;" /></td>
+                            <td>@prod.Descripcion</td>
+                            <td style="text-align:center;">@String.Format("{0:N0}", prod.Cantidad)</td>
+                            @*<td>@Html.Editor("prod.Cantidad")</td>*@
+
+                            <td style="text-align:center;">@String.Format("{0:C2}", prod.PrecioUnitarioVenta)</td>
+                            <td style="text-align:center;">@String.Format("{0:C2}", prod.Total)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        function BorraRegistro() {
+            return confirm("¿Esta Seguro Desea Eliminar Este Registro?");
+        }
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

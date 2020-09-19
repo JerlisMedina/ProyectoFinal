@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.Cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <h2 class="card-title text-primary">Lista de Clientes</h2>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row offset-1">
+        @foreach (var cli in Model)
+        {
+            <div class="card o-hidden border-bottom-primary shadow-lg my-3" style="width:10rem;">
+                <img src="~/Content/Imagenes/@cli.CliImagen" class="card-img-top w-100 h-50" />
+                <div class="card-body text-center">
+                    @Html.ActionLink(cli.Nombre + " " + cli.Apellidos, "Details", new { id = cli.Id }, new { @class = "card-text" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</p>
+

@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.Cliente>
+
+@{
+    /**/
+
+    ViewBag.Title = "Seleccione Cliente";
+}
+
+<div class="row col-12">
+    <div class="form-row align-items-center">
+        <div class="card o-hidden border-0 shadow">
+            <h2 class="card-header bg-primary text-white">Seleccione Cliente a Facturar</h2>
+            <div class="card-body">
+                <div class="col-auto">
+                    <p>
+                        @*@Html.ActionLink("Cliente Nuevo", "Create", "Clientes")*@
+                        @Html.ActionLink("Crear Cliente Nuevo", "Create", new { controller = "Clientes" }, new { @class = "btn btn-primary" })
+                    </p>
+                    
+                    <input class="form-control na" id="input_search" name="search" type="text" style="width:250px;margin-right:5px;margin-bottom:15px;" placeholder="Búscar Dentro Listado..." />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="container-fluid" id="cuerpolistado">
+    <table class="table table-responsive dataTable" role="grid">
+        <thead class="bg-primary text-white font-weight-bold">
+            <tr>
+                <th>
+                    @Html.Label("Nombre Comercial")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellidos)
+                </th>
+                <th>
+                    @Html.Label("RNC/Cédula")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.Label("Opciones")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr id="detallelistado">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreComercial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Num_Documento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger">
+                            <i class="fa fa-cash-register"></i> @Html.ActionLink("Facturar", "Facturar", new { id = item.Id })
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                $("#input_search").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#cuerpolistado #detallelistado").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+}
+

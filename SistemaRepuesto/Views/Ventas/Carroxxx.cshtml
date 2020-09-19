@@ -1,0 +1,54 @@
+﻿@model SistemaRepuesto.Models.CarroCompra
+
+@{
+    ViewBag.Title = "Carro Compras";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <div class="col-auto float-right">
+            <i class="fas fa-wrench fa-3x text-gray-300"></i>
+        </div>
+        <h2 class="card-title text-primary">Articulos Seleccionados</h2>
+        @Html.ActionLink("Crear Nuevo", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-responsive table-bordered dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Imagen</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Monto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prod in Model)
+                    {
+
+                        <tr role="row">
+                            <td><img src="~/Content/Imagenes/@prod.ArtImagen" class="img-fluid img-profile rounded" style="width:60px;height:60px;" /></td>
+
+                            <td>@Html.DisplayFor(model => prod.Descripcion)</td>
+                            <td>@Html.EditorFor(model => prod.Cantidad)</td>
+                            <td>@Html.DisplayFor(model => prod.PrecioUnitarioVenta)</td>
+                            <td>@Html.DisplayFor(model => prod.CantidadDisponible)</td>
+                            <td>@Html.Label(String.Format("{0:C2}", "Total"))</td>
+                            <td>
+                                @Html.ActionLink(" ", "Cart", new { id = prod.id }, new { @class = "fa fa-edit" })
+                                @Html.ActionLink(" ", "Cart", new { id = prod.id }, new { @class = "fa fa-trash" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

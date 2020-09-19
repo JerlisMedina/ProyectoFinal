@@ -1,0 +1,40 @@
+﻿@model SistemaRepuesto.Models.MainMenu
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MainMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MainDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainEstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainEstatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="606fc2c6c9f6478c984946f632abd2ba" Name="Diagram1">
+        <EntityTypeShape EntityType="RepuestoDBModel.CarroCompra" Width="1.5" PointX="10.625" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Cliente" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.ClientesMetodosPago" Width="1.5" PointX="10.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.DetalleMovInventario" Width="1.5" PointX="2.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.DetalleVenta" Width="1.5" PointX="4.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Empleado" Width="1.5" PointX="10.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.EmpresaConfig" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.InventarioArticulo" Width="1.5" PointX="4.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Presentacion" Width="1.5" PointX="7.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Proveedore" Width="1.5" PointX="7" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Venta" Width="1.5" PointX="1.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Login" Width="1.5" PointX="5.875" PointY="10.875" />
+        <EntityTypeShape EntityType="RepuestoDBModel.MainMenu" Width="1.5" PointX="6.625" PointY="8.25" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Role" Width="1.5" PointX="3.625" PointY="11.125" />
+        <EntityTypeShape EntityType="RepuestoDBModel.SubMenu" Width="1.5" PointX="8.875" PointY="10.875" />
+        <AssociationConnector Association="RepuestoDBModel.FK_Login_Roles" />
+        <AssociationConnector Association="RepuestoDBModel.FK_SubMenu_MainMenu" />
+        <AssociationConnector Association="RepuestoDBModel.FK_SubMenu_Roles" />
+        <AssociationConnector Association="RepuestoDBModel.FK_Ventas_Clientes" />
+        <AssociationConnector Association="RepuestoDBModel.FK_DetalleMovInventario_Ventas" />
+        <AssociationConnector Association="RepuestoDBModel.FK_DetalleVentas_InventarioArticulos" />
+        <AssociationConnector Association="RepuestoDBModel.FK_DetalleVentas_Ventas" />
+        <AssociationConnector Association="RepuestoDBModel.FK_InventarioArticulos_Presentacion" />
+        <AssociationConnector Association="RepuestoDBModel.FK_InventarioArticulos_Proveedores" />
+        <EntityTypeShape EntityType="RepuestoDBModel.Categoria" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="RepuestoDBModel.FK_InventarioArticulos_Categoria" />
+        <AssociationConnector Association="RepuestoDBModel.FK_DetalleMovInventario_InventarioArticulos" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

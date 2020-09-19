@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.Proveedore>
+
+@{
+   ViewBag.Title = "Proveedores";
+}
+
+<div class="card o-hidden border-0 shadow mb-2">
+    <div class="card-body">
+        <h2 class="card-title text-primary">Lista de Proveedores</h2>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row offset-1">
+        @foreach (var pro in Model)
+        {
+            <div class="card o-hidden border-bottom-primary shadow-lg my-3" style="width:10rem;">
+                <img src="~/Content/Imagenes/@pro.ProvImagen" class="card-img-top w-100 h-50" />
+                <div class="card-body text-center">
+                    @Html.ActionLink(pro.Razon_Social, "Details", new { id = pro.Id }, new { @class = "card-text" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</p>
+
+

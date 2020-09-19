@@ -1,0 +1,1244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RepuestoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarroCompras">
+          <Key>
+            <PropertyRef Name="Id_CarroCompras" />
+          </Key>
+          <Property Name="Id_CarroCompras" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Cliente" Type="int" />
+          <Property Name="Id_Articulo" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Estatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="256" />
+          <Property Name="Estatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo" Type="varchar" MaxLength="1" />
+          <Property Name="Fecha_Nacimiento" Type="date" />
+          <Property Name="Tipo_Documento" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Num_Documento" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="TipoNCF" Type="varchar" MaxLength="3" />
+          <Property Name="LoginID" Type="int" />
+          <Property Name="CliImagen" Type="varchar" MaxLength="100" />
+          <Property Name="NombreComercial" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ClientesMetodosPago">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Pago" />
+          </Key>
+          <Property Name="ID_Tipo_Pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="Pago_Cuenta" Type="varchar" MaxLength="30" />
+          <Property Name="Pago_Tipo_Cuenta" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Expiracion" Type="varchar" MaxLength="20" />
+          <Property Name="CCV" Type="int" />
+          <Property Name="Institucion_Bancaria" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DetalleMovInventario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Ingreso" Type="int" Nullable="false" />
+          <Property Name="Id_Articulo" Type="int" Nullable="false" />
+          <Property Name="Precio_Compra" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Precio_Venta" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Stock_Inicial" Type="int" Nullable="false" />
+          <Property Name="Stock_Actual" Type="int" Nullable="false" />
+          <Property Name="Fecha_produccion" Type="date" Nullable="false" />
+          <Property Name="Fecha_vencimiento" Type="date" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="Id_Ventas" Type="int" />
+          <Property Name="Requisicion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DetalleVentas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Venta" Type="int" Nullable="false" />
+          <Property Name="Id_Articulo" Type="int" Nullable="false" />
+          <Property Name="Id_MovInventario" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitarioVenta" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="PrecioVenta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DescuentoVenta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Fecha_Nac" Type="date" Nullable="false" />
+          <Property Name="Num_Documento" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="NivelAcceso" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="Cedula" Type="varchar" MaxLength="11" />
+          <Property Name="Fecha_Ingreso" Type="date" />
+          <Property Name="LoginID" Type="int" />
+          <Property Name="EmpImagen" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EmpresaConfig">
+          <Key>
+            <PropertyRef Name="EmpresaID" />
+          </Key>
+          <Property Name="EmpresaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEmpresa" Type="varchar" MaxLength="50" />
+          <Property Name="RNC" Type="varchar" MaxLength="15" />
+          <Property Name="NCF01_Proximo" Type="int" Nullable="false" />
+          <Property Name="NCF02_Proximo" Type="int" Nullable="false" />
+          <Property Name="NCF03_Proximo" Type="int" Nullable="false" />
+          <Property Name="NCF04_Proximo" Type="int" Nullable="false" />
+          <Property Name="NCF14_Proximo" Type="int" Nullable="false" />
+          <Property Name="NCF15_Proximo" Type="int" Nullable="false" />
+          <Property Name="TasaItbisActual" Type="float" Nullable="false" />
+          <Property Name="ArchivoLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ArchivoTipografia" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InventarioArticulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Trabajador" Type="int" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1024" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Id_Categoria" Type="int" />
+          <Property Name="Id_Presentacion" Type="int" />
+          <Property Name="Fecha_Entrada" Type="date" />
+          <Property Name="CostoUnitario" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="PrecioUnitarioVenta" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="CantidadDisponible" Type="int" />
+          <Property Name="CantidadReposicion" Type="int" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="Almacen" Type="varchar" MaxLength="30" />
+          <Property Name="Tramo" Type="varchar" MaxLength="30" />
+          <Property Name="ArtImagen" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="varchar(max)" />
+          <Property Name="PersonalName" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="LoginRoleID" Type="int" />
+          <Property Name="LoginEstatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="MainMenu">
+          <Key>
+            <PropertyRef Name="MainMenuID" />
+          </Key>
+          <Property Name="MainMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainDescripcion" Type="varchar" MaxLength="100" />
+          <Property Name="MainEstatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Presentacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="256" />
+          <Property Name="Estatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Razon_Social" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Sector_Comercial" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="RNC" Type="varchar" MaxLength="20" />
+          <Property Name="Tipo_Documento" Type="varchar" MaxLength="20" />
+          <Property Name="Num_Documento" Type="varchar" MaxLength="11" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Url" Type="varchar" MaxLength="200" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="ProvImagen" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleDescripcion" Type="varchar" MaxLength="100" />
+          <Property Name="RoleEstatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="SubMenu">
+          <Key>
+            <PropertyRef Name="SubID" />
+          </Key>
+          <Property Name="SubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubDescripcion" Type="varchar" MaxLength="100" />
+          <Property Name="SubController" Type="varchar" MaxLength="100" />
+          <Property Name="SubAction" Type="varchar" MaxLength="100" />
+          <Property Name="SubMenuID" Type="int" />
+          <Property Name="SubRoleID" Type="int" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Cliente" Type="int" Nullable="false" />
+          <Property Name="Id_Trabajador" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="ComprobanteFiscal" Type="varchar" MaxLength="20" />
+          <Property Name="Serie" Type="varchar" MaxLength="4" />
+          <Property Name="Correlativo" Type="varchar" MaxLength="7" />
+          <Property Name="Igv" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="MontoGravado" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="MontoExento" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="MontoDescuento" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="MontoItbis" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <Association Name="FK_DetalleMovInventario_InventarioArticulos">
+          <End Role="InventarioArticulos" Type="Self.InventarioArticulos" Multiplicity="1" />
+          <End Role="DetalleMovInventario" Type="Self.DetalleMovInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioArticulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="DetalleMovInventario">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleMovInventario_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="0..1" />
+          <End Role="DetalleMovInventario" Type="Self.DetalleMovInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleMovInventario">
+              <PropertyRef Name="Id_Ventas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVentas_InventarioArticulos">
+          <End Role="InventarioArticulos" Type="Self.InventarioArticulos" Multiplicity="1" />
+          <End Role="DetalleVentas" Type="Self.DetalleVentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioArticulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="DetalleVentas">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVentas_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+          <End Role="DetalleVentas" Type="Self.DetalleVentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVentas">
+              <PropertyRef Name="Id_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArticulos_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="InventarioArticulos" Type="Self.InventarioArticulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulos">
+              <PropertyRef Name="Id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArticulos_Presentacion">
+          <End Role="Presentacion" Type="Self.Presentacion" Multiplicity="0..1" />
+          <End Role="InventarioArticulos" Type="Self.InventarioArticulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArticulos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="InventarioArticulos" Type="Self.InventarioArticulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="LoginRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_MainMenu">
+          <End Role="MainMenu" Type="Self.MainMenu" Multiplicity="0..1" />
+          <End Role="SubMenu" Type="Self.SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainMenu">
+              <PropertyRef Name="MainMenuID" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="SubMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="SubMenu" Type="Self.SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="SubRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ListaMenuActivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListaMenuDesactivado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListaMenuTodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="RepuestoDBModelStoreContainer">
+          <EntitySet Name="CarroCompras" EntityType="Self.CarroCompras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientesMetodosPago" EntityType="Self.ClientesMetodosPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleMovInventario" EntityType="Self.DetalleMovInventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleVentas" EntityType="Self.DetalleVentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpresaConfig" EntityType="Self.EmpresaConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventarioArticulos" EntityType="Self.InventarioArticulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainMenu" EntityType="Self.MainMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presentacion" EntityType="Self.Presentacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubMenu" EntityType="Self.SubMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetalleMovInventario_InventarioArticulos" Association="Self.FK_DetalleMovInventario_InventarioArticulos">
+            <End Role="InventarioArticulos" EntitySet="InventarioArticulos" />
+            <End Role="DetalleMovInventario" EntitySet="DetalleMovInventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleMovInventario_Ventas" Association="Self.FK_DetalleMovInventario_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetalleMovInventario" EntitySet="DetalleMovInventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVentas_InventarioArticulos" Association="Self.FK_DetalleVentas_InventarioArticulos">
+            <End Role="InventarioArticulos" EntitySet="InventarioArticulos" />
+            <End Role="DetalleVentas" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVentas_Ventas" Association="Self.FK_DetalleVentas_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetalleVentas" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArticulos_Categoria" Association="Self.FK_InventarioArticulos_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="InventarioArticulos" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArticulos_Presentacion" Association="Self.FK_InventarioArticulos_Presentacion">
+            <End Role="Presentacion" EntitySet="Presentacion" />
+            <End Role="InventarioArticulos" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArticulos_Proveedores" Association="Self.FK_InventarioArticulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="InventarioArticulos" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Roles" Association="Self.FK_Login_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_MainMenu" Association="Self.FK_SubMenu_MainMenu">
+            <End Role="MainMenu" EntitySet="MainMenu" />
+            <End Role="SubMenu" EntitySet="SubMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_Roles" Association="Self.FK_SubMenu_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SubMenu" EntitySet="SubMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Clientes" Association="Self.FK_Ventas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RepuestoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarroCompra">
+          <Key>
+            <PropertyRef Name="Id_CarroCompras" />
+          </Key>
+          <Property Name="Id_CarroCompras" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Cliente" Type="Int32" />
+          <Property Name="Id_Articulo" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Estatus" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Tipo_Documento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Num_Documento" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="TipoNCF" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LoginID" Type="Int32" />
+          <Property Name="CliImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ventas" Relationship="RepuestoDBModel.FK_Ventas_Clientes" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="NombreComercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClientesMetodosPago">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Pago" />
+          </Key>
+          <Property Name="ID_Tipo_Pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="Pago_Cuenta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Pago_Tipo_Cuenta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Expiracion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CCV" Type="Int32" />
+          <Property Name="Institucion_Bancaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DetalleMovInventario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Ingreso" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Stock_Inicial" Type="Int32" Nullable="false" />
+          <Property Name="Stock_Actual" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_produccion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_vencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="Id_Ventas" Type="Int32" />
+          <Property Name="Requisicion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Venta" Relationship="RepuestoDBModel.FK_DetalleMovInventario_Ventas" FromRole="DetalleMovInventario" ToRole="Venta" />
+          <NavigationProperty Name="InventarioArticulo" Relationship="RepuestoDBModel.FK_DetalleMovInventario_InventarioArticulos" FromRole="DetalleMovInventario" ToRole="InventarioArticulo" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Venta" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Id_MovInventario" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitarioVenta" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="PrecioVenta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DescuentoVenta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <NavigationProperty Name="InventarioArticulo" Relationship="RepuestoDBModel.FK_DetalleVentas_InventarioArticulos" FromRole="DetalleVenta" ToRole="InventarioArticulo" />
+          <NavigationProperty Name="Venta" Relationship="RepuestoDBModel.FK_DetalleVentas_Ventas" FromRole="DetalleVenta" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Nac" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Num_Documento" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NivelAcceso" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="Cedula" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+          <Property Name="LoginID" Type="Int32" />
+          <Property Name="EmpImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EmpresaConfig">
+          <Key>
+            <PropertyRef Name="EmpresaID" />
+          </Key>
+          <Property Name="EmpresaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RNC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NCF01_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="NCF02_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="NCF03_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="NCF04_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="NCF14_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="NCF15_Proximo" Type="Int32" Nullable="false" />
+          <Property Name="TasaItbisActual" Type="Double" Nullable="false" />
+          <Property Name="ArchivoLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ArchivoTipografia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="InventarioArticulo">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Trabajador" Type="Int32" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Id_Categoria" Type="Int32" />
+          <Property Name="Id_Presentacion" Type="Int32" />
+          <Property Name="Fecha_Entrada" Type="DateTime" Precision="0" />
+          <Property Name="CostoUnitario" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PrecioUnitarioVenta" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CantidadDisponible" Type="Int32" />
+          <Property Name="CantidadReposicion" Type="Int32" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="Almacen" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Tramo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ArtImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetalleVentas" Relationship="RepuestoDBModel.FK_DetalleVentas_InventarioArticulos" FromRole="InventarioArticulo" ToRole="DetalleVenta" />
+          <NavigationProperty Name="Presentacion" Relationship="RepuestoDBModel.FK_InventarioArticulos_Presentacion" FromRole="InventarioArticulo" ToRole="Presentacion" />
+          <NavigationProperty Name="Proveedore" Relationship="RepuestoDBModel.FK_InventarioArticulos_Proveedores" FromRole="InventarioArticulo" ToRole="Proveedore" />
+          <NavigationProperty Name="Categoria" Relationship="RepuestoDBModel.FK_InventarioArticulos_Categoria" FromRole="InventarioArticulo" ToRole="Categoria" />
+          <NavigationProperty Name="DetalleMovInventarios" Relationship="RepuestoDBModel.FK_DetalleMovInventario_InventarioArticulos" FromRole="InventarioArticulo" ToRole="DetalleMovInventario" />
+        </EntityType>
+        <EntityType Name="Presentacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <NavigationProperty Name="InventarioArticulos" Relationship="RepuestoDBModel.FK_InventarioArticulos_Presentacion" FromRole="Presentacion" ToRole="InventarioArticulo" />
+        </EntityType>
+        <EntityType Name="Proveedore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Razon_Social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sector_Comercial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RNC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_Documento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Documento" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="ProvImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="InventarioArticulos" Relationship="RepuestoDBModel.FK_InventarioArticulos_Proveedores" FromRole="Proveedore" ToRole="InventarioArticulo" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="Id_Trabajador" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ComprobanteFiscal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Correlativo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Igv" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="MontoGravado" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="MontoExento" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="MontoDescuento" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="MontoItbis" Type="Decimal" Precision="11" Scale="2" />
+          <NavigationProperty Name="Cliente" Relationship="RepuestoDBModel.FK_Ventas_Clientes" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleMovInventarios" Relationship="RepuestoDBModel.FK_DetalleMovInventario_Ventas" FromRole="Venta" ToRole="DetalleMovInventario" />
+          <NavigationProperty Name="DetalleVentas" Relationship="RepuestoDBModel.FK_DetalleVentas_Ventas" FromRole="Venta" ToRole="DetalleVenta" />
+        </EntityType>
+        <EntityContainer Name="RepuestoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarroCompras" EntityType="Self.CarroCompra" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="ClientesMetodosPagoes" EntityType="Self.ClientesMetodosPago" />
+          <EntitySet Name="DetalleMovInventarios" EntityType="Self.DetalleMovInventario" />
+          <EntitySet Name="DetalleVentas" EntityType="Self.DetalleVenta" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleado" />
+          <EntitySet Name="EmpresaConfigs" EntityType="Self.EmpresaConfig" />
+          <EntitySet Name="InventarioArticulos" EntityType="Self.InventarioArticulo" />
+          <EntitySet Name="Presentacions" EntityType="Self.Presentacion" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedore" />
+          <EntitySet Name="Ventas" EntityType="Self.Venta" />
+          <FunctionImport Name="ListaMenuActivo" ReturnType="Collection(RepuestoDBModel.ListaMenuActivo_Result)" />
+          <FunctionImport Name="ListaMenuDesactivado" ReturnType="Collection(RepuestoDBModel.ListaMenuDesactivado_Result)" />
+          <FunctionImport Name="ListaMenuTodos" ReturnType="Collection(RepuestoDBModel.ListaMenuTodos_Result)" />
+          <EntitySet Name="Logins" EntityType="RepuestoDBModel.Login" />
+          <EntitySet Name="MainMenus" EntityType="RepuestoDBModel.MainMenu" />
+          <EntitySet Name="Roles" EntityType="RepuestoDBModel.Role" />
+          <EntitySet Name="SubMenus" EntityType="RepuestoDBModel.SubMenu" />
+          <AssociationSet Name="FK_Login_Roles" Association="RepuestoDBModel.FK_Login_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_MainMenu" Association="RepuestoDBModel.FK_SubMenu_MainMenu">
+            <End Role="MainMenu" EntitySet="MainMenus" />
+            <End Role="SubMenu" EntitySet="SubMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenu_Roles" Association="RepuestoDBModel.FK_SubMenu_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="SubMenu" EntitySet="SubMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Clientes" Association="RepuestoDBModel.FK_Ventas_Clientes">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Venta" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleMovInventario_Ventas" Association="RepuestoDBModel.FK_DetalleMovInventario_Ventas">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="DetalleMovInventario" EntitySet="DetalleMovInventarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVentas_InventarioArticulos" Association="RepuestoDBModel.FK_DetalleVentas_InventarioArticulos">
+            <End Role="InventarioArticulo" EntitySet="InventarioArticulos" />
+            <End Role="DetalleVenta" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVentas_Ventas" Association="RepuestoDBModel.FK_DetalleVentas_Ventas">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="DetalleVenta" EntitySet="DetalleVentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArticulos_Presentacion" Association="RepuestoDBModel.FK_InventarioArticulos_Presentacion">
+            <End Role="Presentacion" EntitySet="Presentacions" />
+            <End Role="InventarioArticulo" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArticulos_Proveedores" Association="RepuestoDBModel.FK_InventarioArticulos_Proveedores">
+            <End Role="Proveedore" EntitySet="Proveedores" />
+            <End Role="InventarioArticulo" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <EntitySet Name="Categorias" EntityType="RepuestoDBModel.Categoria" />
+          <AssociationSet Name="FK_InventarioArticulos_Categoria" Association="RepuestoDBModel.FK_InventarioArticulos_Categoria">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="InventarioArticulo" EntitySet="InventarioArticulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleMovInventario_InventarioArticulos" Association="RepuestoDBModel.FK_DetalleMovInventario_InventarioArticulos">
+            <End Role="InventarioArticulo" EntitySet="InventarioArticulos" />
+            <End Role="DetalleMovInventario" EntitySet="DetalleMovInventarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="ListaMenuActivo_Result">
+          <Property Type="Int32" Name="MenuID" Nullable="false" />
+          <Property Type="String" Name="MenuDescripcion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MenuPadre" Nullable="true" />
+          <Property Type="String" Name="MenuIcon" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MenuUrl" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="MenuActivo" Nullable="true" />
+          <Property Type="DateTime" Name="MenuCreadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuCreadoPor" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MenuModificadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuModificacoPor" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ListaMenuDesactivado_Result">
+          <Property Type="Int32" Name="MenuID" Nullable="false" />
+          <Property Type="String" Name="MenuDescripcion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MenuPadre" Nullable="true" />
+          <Property Type="String" Name="MenuIcon" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MenuUrl" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="MenuActivo" Nullable="true" />
+          <Property Type="DateTime" Name="MenuCreadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuCreadoPor" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MenuModificadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuModificacoPor" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ListaMenuTodos_Result">
+          <Property Type="Int32" Name="MenuID" Nullable="false" />
+          <Property Type="String" Name="MenuDescripcion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MenuPadre" Nullable="true" />
+          <Property Type="String" Name="MenuIcon" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MenuUrl" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="MenuActivo" Nullable="true" />
+          <Property Type="DateTime" Name="MenuCreadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuCreadoPor" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MenuModificadoEn" Nullable="true" />
+          <Property Type="String" Name="MenuModificacoPor" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginRoleID" Type="Int32" />
+          <Property Name="LoginEstatus" Type="Boolean" />
+          <NavigationProperty Name="Role" Relationship="RepuestoDBModel.FK_Login_Roles" FromRole="Login" ToRole="Role" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MainMenu">
+          <Key>
+            <PropertyRef Name="MainMenuID" />
+          </Key>
+          <Property Name="MainMenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainDescripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MainEstatus" Type="Boolean" />
+          <NavigationProperty Name="SubMenus" Relationship="RepuestoDBModel.FK_SubMenu_MainMenu" FromRole="MainMenu" ToRole="SubMenu" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleDescripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleEstatus" Type="Boolean" />
+          <NavigationProperty Name="Logins" Relationship="RepuestoDBModel.FK_Login_Roles" FromRole="Role" ToRole="Login" />
+          <NavigationProperty Name="SubMenus" Relationship="RepuestoDBModel.FK_SubMenu_Roles" FromRole="Role" ToRole="SubMenu" />
+        </EntityType>
+        <EntityType Name="SubMenu">
+          <Key>
+            <PropertyRef Name="SubID" />
+          </Key>
+          <Property Name="SubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubDescripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubController" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubAction" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubMenuID" Type="Int32" />
+          <Property Name="SubRoleID" Type="Int32" />
+          <NavigationProperty Name="MainMenu" Relationship="RepuestoDBModel.FK_SubMenu_MainMenu" FromRole="SubMenu" ToRole="MainMenu" />
+          <NavigationProperty Name="Role" Relationship="RepuestoDBModel.FK_SubMenu_Roles" FromRole="SubMenu" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Login_Roles">
+          <End Type="RepuestoDBModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="LoginRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_MainMenu">
+          <End Type="RepuestoDBModel.MainMenu" Role="MainMenu" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.SubMenu" Role="SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainMenu">
+              <PropertyRef Name="MainMenuID" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="SubMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenu_Roles">
+          <End Type="RepuestoDBModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.SubMenu" Role="SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="SubRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Clientes">
+          <End Type="RepuestoDBModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RepuestoDBModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleMovInventario_Ventas">
+          <End Type="RepuestoDBModel.Venta" Role="Venta" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.DetalleMovInventario" Role="DetalleMovInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleMovInventario">
+              <PropertyRef Name="Id_Ventas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVentas_InventarioArticulos">
+          <End Type="RepuestoDBModel.InventarioArticulo" Role="InventarioArticulo" Multiplicity="1" />
+          <End Type="RepuestoDBModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioArticulo">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVentas_Ventas">
+          <End Type="RepuestoDBModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="RepuestoDBModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="Id_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArticulos_Presentacion">
+          <End Type="RepuestoDBModel.Presentacion" Role="Presentacion" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.InventarioArticulo" Role="InventarioArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulo">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArticulos_Proveedores">
+          <End Type="RepuestoDBModel.Proveedore" Role="Proveedore" Multiplicity="1" />
+          <End Type="RepuestoDBModel.InventarioArticulo" Role="InventarioArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedore">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulo">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <NavigationProperty Name="InventarioArticulos" Relationship="RepuestoDBModel.FK_InventarioArticulos_Categoria" FromRole="Categoria" ToRole="InventarioArticulo" />
+        </EntityType>
+        <Association Name="FK_InventarioArticulos_Categoria">
+          <End Type="RepuestoDBModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+          <End Type="RepuestoDBModel.InventarioArticulo" Role="InventarioArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArticulo">
+              <PropertyRef Name="Id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleMovInventario_InventarioArticulos">
+          <End Type="RepuestoDBModel.InventarioArticulo" Role="InventarioArticulo" Multiplicity="1" />
+          <End Type="RepuestoDBModel.DetalleMovInventario" Role="DetalleMovInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioArticulo">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="DetalleMovInventario">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RepuestoDBModelStoreContainer" CdmEntityContainer="RepuestoEntities">
+          <EntitySetMapping Name="CarroCompras">
+            <EntityTypeMapping TypeName="RepuestoDBModel.CarroCompra">
+              <MappingFragment StoreEntitySet="CarroCompras">
+                <ScalarProperty Name="Id_CarroCompras" ColumnName="Id_CarroCompras" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Tipo_Documento" ColumnName="Tipo_Documento" />
+                <ScalarProperty Name="Num_Documento" ColumnName="Num_Documento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="TipoNCF" ColumnName="TipoNCF" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="CliImagen" ColumnName="CliImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientesMetodosPagoes">
+            <EntityTypeMapping TypeName="RepuestoDBModel.ClientesMetodosPago">
+              <MappingFragment StoreEntitySet="ClientesMetodosPago">
+                <ScalarProperty Name="ID_Tipo_Pago" ColumnName="ID_Tipo_Pago" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="Pago_Cuenta" ColumnName="Pago_Cuenta" />
+                <ScalarProperty Name="Pago_Tipo_Cuenta" ColumnName="Pago_Tipo_Cuenta" />
+                <ScalarProperty Name="Fecha_Expiracion" ColumnName="Fecha_Expiracion" />
+                <ScalarProperty Name="CCV" ColumnName="CCV" />
+                <ScalarProperty Name="Institucion_Bancaria" ColumnName="Institucion_Bancaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleMovInventarios">
+            <EntityTypeMapping TypeName="RepuestoDBModel.DetalleMovInventario">
+              <MappingFragment StoreEntitySet="DetalleMovInventario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Ingreso" ColumnName="Id_Ingreso" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+                <ScalarProperty Name="Stock_Inicial" ColumnName="Stock_Inicial" />
+                <ScalarProperty Name="Stock_Actual" ColumnName="Stock_Actual" />
+                <ScalarProperty Name="Fecha_produccion" ColumnName="Fecha_produccion" />
+                <ScalarProperty Name="Fecha_vencimiento" ColumnName="Fecha_vencimiento" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Id_Ventas" ColumnName="Id_Ventas" />
+                <ScalarProperty Name="Requisicion" ColumnName="Requisicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleVentas">
+            <EntityTypeMapping TypeName="RepuestoDBModel.DetalleVenta">
+              <MappingFragment StoreEntitySet="DetalleVentas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Venta" ColumnName="Id_Venta" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Id_MovInventario" ColumnName="Id_MovInventario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitarioVenta" ColumnName="PrecioUnitarioVenta" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="DescuentoVenta" ColumnName="DescuentoVenta" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
+                <ScalarProperty Name="Num_Documento" ColumnName="Num_Documento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NivelAcceso" ColumnName="NivelAcceso" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="EmpImagen" ColumnName="EmpImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpresaConfigs">
+            <EntityTypeMapping TypeName="RepuestoDBModel.EmpresaConfig">
+              <MappingFragment StoreEntitySet="EmpresaConfig">
+                <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="RNC" ColumnName="RNC" />
+                <ScalarProperty Name="NCF01_Proximo" ColumnName="NCF01_Proximo" />
+                <ScalarProperty Name="NCF02_Proximo" ColumnName="NCF02_Proximo" />
+                <ScalarProperty Name="NCF03_Proximo" ColumnName="NCF03_Proximo" />
+                <ScalarProperty Name="NCF04_Proximo" ColumnName="NCF04_Proximo" />
+                <ScalarProperty Name="NCF14_Proximo" ColumnName="NCF14_Proximo" />
+                <ScalarProperty Name="NCF15_Proximo" ColumnName="NCF15_Proximo" />
+                <ScalarProperty Name="TasaItbisActual" ColumnName="TasaItbisActual" />
+                <ScalarProperty Name="ArchivoLogo" ColumnName="ArchivoLogo" />
+                <ScalarProperty Name="ArchivoTipografia" ColumnName="ArchivoTipografia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventarioArticulos">
+            <EntityTypeMapping TypeName="RepuestoDBModel.InventarioArticulo">
+              <MappingFragment StoreEntitySet="InventarioArticulos">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Id_Trabajador" ColumnName="Id_Trabajador" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Fecha_Entrada" ColumnName="Fecha_Entrada" />
+                <ScalarProperty Name="CostoUnitario" ColumnName="CostoUnitario" />
+                <ScalarProperty Name="PrecioUnitarioVenta" ColumnName="PrecioUnitarioVenta" />
+                <ScalarProperty Name="CantidadDisponible" ColumnName="CantidadDisponible" />
+                <ScalarProperty Name="CantidadReposicion" ColumnName="CantidadReposicion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+                <ScalarProperty Name="Tramo" ColumnName="Tramo" />
+                <ScalarProperty Name="ArtImagen" ColumnName="ArtImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presentacions">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Presentacion">
+              <MappingFragment StoreEntitySet="Presentacion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Proveedore">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Razon_Social" ColumnName="Razon_Social" />
+                <ScalarProperty Name="Sector_Comercial" ColumnName="Sector_Comercial" />
+                <ScalarProperty Name="RNC" ColumnName="RNC" />
+                <ScalarProperty Name="Tipo_Documento" ColumnName="Tipo_Documento" />
+                <ScalarProperty Name="Num_Documento" ColumnName="Num_Documento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="ProvImagen" ColumnName="ProvImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Venta">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Id_Trabajador" ColumnName="Id_Trabajador" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ComprobanteFiscal" ColumnName="ComprobanteFiscal" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Correlativo" ColumnName="Correlativo" />
+                <ScalarProperty Name="Igv" ColumnName="Igv" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="MontoGravado" ColumnName="MontoGravado" />
+                <ScalarProperty Name="MontoExento" ColumnName="MontoExento" />
+                <ScalarProperty Name="MontoDescuento" ColumnName="MontoDescuento" />
+                <ScalarProperty Name="MontoItbis" ColumnName="MontoItbis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ListaMenuActivo" FunctionName="RepuestoDBModel.Store.ListaMenuActivo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RepuestoDBModel.ListaMenuActivo_Result">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuDescripcion" ColumnName="MenuDescripcion" />
+                <ScalarProperty Name="MenuPadre" ColumnName="MenuPadre" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
+                <ScalarProperty Name="MenuActivo" ColumnName="MenuActivo" />
+                <ScalarProperty Name="MenuCreadoEn" ColumnName="MenuCreadoEn" />
+                <ScalarProperty Name="MenuCreadoPor" ColumnName="MenuCreadoPor" />
+                <ScalarProperty Name="MenuModificadoEn" ColumnName="MenuModificadoEn" />
+                <ScalarProperty Name="MenuModificacoPor" ColumnName="MenuModificacoPor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListaMenuDesactivado" FunctionName="RepuestoDBModel.Store.ListaMenuDesactivado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RepuestoDBModel.ListaMenuDesactivado_Result">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuDescripcion" ColumnName="MenuDescripcion" />
+                <ScalarProperty Name="MenuPadre" ColumnName="MenuPadre" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
+                <ScalarProperty Name="MenuActivo" ColumnName="MenuActivo" />
+                <ScalarProperty Name="MenuCreadoEn" ColumnName="MenuCreadoEn" />
+                <ScalarProperty Name="MenuCreadoPor" ColumnName="MenuCreadoPor" />
+                <ScalarProperty Name="MenuModificadoEn" ColumnName="MenuModificadoEn" />
+                <ScalarProperty Name="MenuModificacoPor" ColumnName="MenuModificacoPor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListaMenuTodos" FunctionName="RepuestoDBModel.Store.ListaMenuTodos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RepuestoDBModel.ListaMenuTodos_Result">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuDescripcion" ColumnName="MenuDescripcion" />
+                <ScalarProperty Name="MenuPadre" ColumnName="MenuPadre" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuUrl" ColumnName="MenuUrl" />
+                <ScalarProperty Name="MenuActivo" ColumnName="MenuActivo" />
+                <ScalarProperty Name="MenuCreadoEn" ColumnName="MenuCreadoEn" />
+                <ScalarProperty Name="MenuCreadoPor" ColumnName="MenuCreadoPor" />
+                <ScalarProperty Name="MenuModificadoEn" ColumnName="MenuModificadoEn" />
+                <ScalarProperty Name="MenuModificacoPor" ColumnName="MenuModificacoPor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="LoginEstatus" ColumnName="LoginEstatus" />
+                <ScalarProperty Name="LoginRoleID" ColumnName="LoginRoleID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PersonalName" ColumnName="PersonalName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainMenus">
+            <EntityTypeMapping TypeName="RepuestoDBModel.MainMenu">
+              <MappingFragment StoreEntitySet="MainMenu">
+                <ScalarProperty Name="MainEstatus" ColumnName="MainEstatus" />
+                <ScalarProperty Name="MainDescripcion" ColumnName="MainDescripcion" />
+                <ScalarProperty Name="MainMenuID" ColumnName="MainMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleEstatus" ColumnName="RoleEstatus" />
+                <ScalarProperty Name="RoleDescripcion" ColumnName="RoleDescripcion" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubMenus">
+            <EntityTypeMapping TypeName="RepuestoDBModel.SubMenu">
+              <MappingFragment StoreEntitySet="SubMenu">
+                <ScalarProperty Name="SubRoleID" ColumnName="SubRoleID" />
+                <ScalarProperty Name="SubMenuID" ColumnName="SubMenuID" />
+                <ScalarProperty Name="SubAction" ColumnName="SubAction" />
+                <ScalarProperty Name="SubController" ColumnName="SubController" />
+                <ScalarProperty Name="SubDescripcion" ColumnName="SubDescripcion" />
+                <ScalarProperty Name="SubID" ColumnName="SubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="RepuestoDBModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

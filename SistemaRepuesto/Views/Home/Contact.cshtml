@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>Contactanos</h2>
+
+<div class="card shadow-lg mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#carlos" class="d-block card-header py-3 bg-primary" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="carlos" id="abrirUno">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <img src="~/Content/Imagenes/cp.jpg" class="rounded-circle" style="width:100px;height:100px;"/>
+        </h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse" id="carlos">
+        <div class="card-body">
+            <p>
+                <a class="btn btn-primary btn-circle" href="#" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="btn btn-primary btn-circle" href="#" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="btn btn-primary btn-circle" href="#" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </p>
+            <address class="card-text">
+                Carlos Raul Peña Evertsz <br />
+                Santo Domingo, Republica Dominicana <br />
+                809.330.8938 <br />
+                <a href="mailto:carlosrpevertsz@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                    carlosrpevertsz@gmail.com
+                </a>
+            </address>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-lg mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#jerlis" class="d-block card-header py-3 bg-primary" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="jerlis" id="abrirDos">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <img src="~/Content/Imagenes/jm.jpg" class="rounded-circle" style="width:100px;height:100px;"/>
+        </h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse" id="jerlis">
+        <div class="card-body">
+            <p>
+                <a class="btn btn-primary btn-circle" href="https://www.facebook.com/profile.php?id=100008580108887" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="btn btn-primary btn-circle" href="https://twitter.com/jerlismedina" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="btn btn-primary btn-circle" href="https://instagram.com/jerlismedina" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </p>            
+            
+            <address class="card-text">
+                Jerlis Antonio Medina Gomez <br />
+                Puerto Plata, Republica Dominicana <br />
+                829.382.4375 <br />
+                <a href="mailto:jerlismedina@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                    jerlismedina@gmail.com
+                </a>
+            </address>
+        </div>
+    </div>
+</div>
+<br />
+<p>
+    @Html.ActionLink(" Inicio", "Index", null, new { @class = "fa fa-home" })
+</p>
+
+@section Scripts {
+   <script type="text/javascript">
+       $(document).ready(function () {
+           $("#abrirUno").click(function () {
+               $("#carlos").slideToggle();
+           });
+
+           $("#abrirDos").click(function () {
+               $("#jerlis").slideToggle();
+           });
+       });
+    </script>
+}

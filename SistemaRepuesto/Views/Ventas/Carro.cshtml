@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.VentasCarrito>
+
+@{
+    ViewBag.Title = "Carro Compras";
+}
+
+
+<div class="row" style="width:300px;max-height:300px;">
+    <div class="form-row align-items-center">
+        <div class="card o-hidden border-0 shadow">
+            <h2 class="card-header bg-primary text-white">Carro de Compras</h2>
+            <div class="card-body">
+                <div class="col-sm-2" style="margin-right:8px;">
+                    <input class="form-control na" id="input_search" name="search" type="text" style="height:40px;width:250px;height:30px;  margin-right:5px;" placeholder="Búsqueda Dentro Carro..." />
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+</br >
+<div class="container-fluid">
+    <div class="card shadow mb-4" style="width:auto;">
+        <div class="card-body">
+            
+            <div class="row float-right ">
+                <div class="container">
+                    @Html.ActionLink("Proceder y Selecionar Cliente", "SelCli", "Ventas", new { controller = "Home" }, new { @class = "btn btn-success" })
+                    <button type="button" style="justity-right;padding-right:unset; width:200px;height:120px;" class="btn btn-primary">
+                        @*<span class="badge">*@Artículos: @TempData["Cantidad"]@*</span>*@
+                        </br>SUBTOTAL: @TempData["Subtotal"]
+                        </br>ITBIS: @TempData["Itbis"]
+                        </br>TOTAL: @TempData["Total"]
+                    </button>
+                </div>
+            </div>
+
+            <div class="well" id="cuerpolistado">
+                <table class="table table-responsive table-bordered dataTable" role="grid">
+                    <thead>
+                        <tr role="row">
+                            <th> Imagen </th>
+                            <th> Descripción </th>
+                            <th> Cantidad </th>
+                            <th> Precio Unitario</th>
+                            <th>Monto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prod in Model)
+                        {
+
+                            <tr role="row">
+                                @*Modificado por Carlos*@
+                                <td><img src="~/Content/Imagenes/@prod.ArtImagen" class="img-fluid img-profile rounded" style="width:60px;height:60px;" /></td>
+                                <td>@prod.Descripcion</td>
+                                <td>@String.Format("{0:N0}", prod.Cantidad)</td>
+                                @*<td>@Html.Editor("prod.Cantidad")</td>*@
+
+                                <td>@String.Format("{0:C2}", prod.PrecioUnitarioVenta)</td>
+                                <td>@String.Format("{0:C2}", prod.Total)</td>
+                                <td>
+
+                                    @Html.ActionLink(" ", "ActualizarItem", new { id = prod.Id_Articulo }, new { @class = "fa fa-edit" })
+                                    @Html.ActionLink("  ", "BorrarItem", new { id = prod.Id_Articulo }, new { @class = "fa fa-trash" })
+
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cuerpolistado tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+

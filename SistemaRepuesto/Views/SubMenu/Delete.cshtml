@@ -1,0 +1,77 @@
+﻿@model SistemaRepuesto.Models.SubMenu
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <h5 class="card-header bg-primary text-white">
+        <div class="col-auto float-right">
+            <i class="fas fa-trash fa-1x text-gray-300"></i>
+        </div>
+        Eliminar Sub-Menu @Model.SubDescripcion?
+    </h5>
+
+    <div class="card-body p-5">
+        <div class="form-horizontal">
+            <dl class="dl-horizontal">
+                <dt>
+                    Descripcion
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubDescripcion)
+                </dd>
+
+                <dt>
+                    Controller
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubController)
+                </dd>
+
+                <dt>
+                    Accion
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubAction)
+                </dd>
+
+                <dt>
+                    Menu Principal
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MainMenu.MainDescripcion)
+                </dd>
+
+                <dt>
+                    Role de Usuario
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Role.RoleDescripcion)
+                </dd>
+
+            </dl>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink(" Back to List", "Index", null, new { @class = "fa fa-home" })
+</div>
+

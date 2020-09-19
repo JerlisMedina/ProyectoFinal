@@ -1,0 +1,187 @@
+﻿@model IEnumerable<SistemaRepuesto.Models.InventarioArticulo>
+
+@{
+                /**/
+
+                /**/
+
+                /**/
+                Layout = null;
+
+                ViewBag.Title = "Inventario de Articulos";
+}
+
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: lawngreen;
+            color: black;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: lavender;
+        }
+
+        #icon-modificar {
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527zM8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/> </svg>
+        }
+    </style>
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        function printpage() {
+            var grupobotones = document.getElementById("grupobotones");
+            grupobotones.style.visibility = 'hidden';
+            window.print()
+            grupobotones.style.visibility = 'visible';
+        }
+    </script>
+    <script type="text/javascript">
+        function continuar() {
+            location.href = '/Reportes/ReporteArticulos';
+        }
+    </script>
+
+
+
+</head>
+@{
+    decimal Totales = 0;
+    int Cantidad = 0;
+    DateTime Fecha;
+}
+
+<body>
+
+    <div id="grupobotones" style="text-align:center;">
+        <div class="container">
+            <input id="printbutton" class="btn btn-success" type="button" value="Imprimir Reporte" onclick="printpage()" />
+            <input id="continuarbutton" class="btn btn-success" type="button" value="Volver a Consulta" onclick="continuar()" />
+        </div>
+    </div>
+
+
+    <br />
+    <h2 style="background-color:  lavender; color: black; text-align: center; font-style: oblique;">
+        Listado de Artículos en Inventario
+    </h2>
+
+
+
+
+    @using (Html.BeginForm())
+    {
+        <div class="well" id="cuerpolistado">
+            <table align="center" border="=" 1" cellpadding="4" cellspacing="4">
+                <thead>
+                    <tr>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Código</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Descripción</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Categoria</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Presentación</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Fecha Entrada</th>
+
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Disponible</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Mínimo</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Costo Unit.</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Precio Unit.</th>
+                        <th style="background-color: dodgerblue; color: white;text-align:center;">Suplidor</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        {
+                            if (item.Proveedore.Razon_Social == "")
+                            {
+                                item.Proveedore.Razon_Social = "*Info. No Disponible*";
+                            }
+                            Cantidad++;
+
+                            int MaxLen = 30;
+                            String Descripcion = item.Proveedore.Razon_Social;
+                            if (Descripcion.Length > MaxLen)
+                            {
+                                Descripcion = Descripcion.Substring(0, MaxLen) + "..."; //Truncamos Descripcion
+                            }
+                            item.Proveedore.Razon_Social = Descripcion;
+
+                            MaxLen = 30;
+                            Descripcion = item.Descripcion;
+                            if (Descripcion.Length > MaxLen)
+                            {
+                                Descripcion = Descripcion.Substring(0, MaxLen) + "..."; //Truncamos Descripcion
+                            }
+                            item.Descripcion = Descripcion;
+                            Fecha = (DateTime)item.Fecha_Entrada;
+                        }
+                        <tr style="color:darkslategrey;">
+                            <td>@item.Codigo</td>
+                            <td>@item.Descripcion</td>
+                            <td style="text-align:left;">@item.Categoria.Descripcion</td>
+                            <td style="text-align:center;">@item.Presentacion.Descripcion </td>
+                            <td style="text-align:center;padding-right:5px;">@Fecha.ToString("dd/MMM/yyyy")</td>
+                            <td style="text-align:center;padding-right:5px;">@String.Format("{0:N0}", item.CantidadDisponible)</td>
+                            <td style="text-align:center;padding-right:5px;">@String.Format("{0:N0}", item.CantidadReposicion)</td>
+                            <td style="text-align:right;padding-right:5px;">@String.Format("{0:C2}", item.CostoUnitario)</td>
+                            <td style="text-align:right;padding-right:5px;">@String.Format("{0:C2}", item.PrecioUnitarioVenta)</td>
+                            <td style="text-align:left;padding-right:5px;">@String.Format("{0:N0}", item.Proveedore.Razon_Social)</td>
+                        </tr>
+                    }
+                    <tr style="color:black">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align:right;padding-right:5px;"> TOTAL DE ARTICULOS </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align:right;padding-right:5px;">@String.Format("{0:N0}", Cantidad)</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+</body>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cuerpolistado tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+
